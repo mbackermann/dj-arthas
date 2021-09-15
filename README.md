@@ -34,7 +34,7 @@ npm start
 ## Configuration
 ### Environment Variables
 | Variable Name | Description | Accepted Values | Default | Required |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 |DISCORD_BOT_TOKEN| Token from your Discord Bot | NA | null | true |
 |DISCORD_CLIENT_ID| Discord Client ID | NA | null | true |
 |BOT_LEAVE_ON_QUEUE_END| Whether the bot should leave the channel after the queue has ended | true/false | true | false |

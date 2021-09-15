@@ -21,11 +21,15 @@ client.on('guildCreate', async (guild) => {
   console.log('Bot joined a guild!', guild)
 })
 
-player.on('trackStart', (queue, track) =>
-  queue.metadata.channel.send(
-    `🎶 | Now playing **${track.title}** in **${queue.connection.channel.name}**!`
-  )
-)
+player.on('trackStart', (queue, track) => {
+  try{
+    queue.metadata.channel.send(
+      `🎶 | Now playing **${track.title}** in **${queue.connection.channel.name}**!`
+    )
+  }catch(error){
+    console.error(error)
+  }
+})
 
 player.on('error', (queue, error) => {
   console.log(
@@ -40,22 +44,39 @@ player.on('connectionError', (queue, error) => {
 })
 
 player.on('trackAdd', (queue, track) => {
-  console.log("Test123 queue", queue.metadata.send)
-  queue.metadata.send(`🎶 | **${track.title}** added to queue!`)
+  try {
+    queue.metadata.send(`🎶 | **${track.title}** added to queue!`)
+  }catch(error){
+    console.error(error)
+  }
 })
 
 player.on('botDisconnect', (queue) => {
-  queue.metadata.send(
-    '❌ | I was manually disconnected from the voice channel, clearing queue!'
-  )
+  try{
+    queue.metadata.send(
+      '❌ | I was manually disconnected from the voice channel, clearing queue!'
+    )
+  }catch(error){
+    console.error(error)
+  }
+  
 })
 
 player.on('channelEmpty', (queue) => {
-  queue.metadata.send('❌ | Leaving the channel, nobody is here')
+  try{
+    queue.metadata.send('❌ | Leaving the channel, nobody is here')
+  }catch(error){
+    console.error(error)
+  }
 })
 
 player.on('queueEnd', (queue) => {
-  queue.metadata.send('✅ | You have no more tracks in queue!')
+  try{
+    queue.metadata.send('✅ | You have no more tracks in queue!')
+  }catch(error){
+    console.error(error)
+  }
+  
 })
 
 client.on('interactionCreate', async (interaction) => {

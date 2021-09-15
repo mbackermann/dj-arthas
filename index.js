@@ -66,9 +66,9 @@ player.on('connectionCreate', (queue, connection) => {
       content: `👍 **Joined \`${connection.channel.name}\` and bound to <#${queue.metadata.channel.id}>**`,
     })
     Logger.log(
-      `New connection on ${
+      `New Voice Connection on ${
         queue.guild.id
-      }. Total connections ${client.addVoiceConnection(queue.guild.id)}`
+      }. Total voice connections: ${client.addVoiceConnection(queue.guild.id)}`
     )
   } catch (error) {
     Logger.error(error)
@@ -78,9 +78,9 @@ player.on('connectionCreate', (queue, connection) => {
 player.on('botDisconnect', (queue) => {
   Logger.debug('playerBotDisconnected', queue)
   Logger.log(
-    `Voice Channel Guild ${
+    `Voice Channel on Guild ${
       queue.guild.id
-    } disconnected. Total connections ${client.deductVoiceConnection(
+    } disconnected. Total voice connections: ${client.deductVoiceConnection(
       queue.guild.id
     )}`
   )

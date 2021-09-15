@@ -40,6 +40,7 @@ player.on('connectionError', (queue, error) => {
 })
 
 player.on('trackAdd', (queue, track) => {
+  console.log("Test123 queue", queue.metadata.send)
   queue.metadata.send(`🎶 | **${track.title}** added to queue!`)
 })
 

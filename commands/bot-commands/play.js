@@ -15,7 +15,6 @@ module.exports = {
     },
   ],
   async execute(interaction, player) {
-    await interaction.deferReply()
     try {
       if (
         !(interaction.member instanceof GuildMember) ||
@@ -37,6 +36,8 @@ module.exports = {
           ephemeral: true,
         })
       }
+
+      await interaction.deferReply()
 
       const search = interaction.options.get('search').value
       const searchResult = await player

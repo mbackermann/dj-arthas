@@ -59,6 +59,7 @@ module.exports = {
         leaveOnStop: true,
         leaveOnEmpty: true,
         leaveOnEmptyCooldown: 30000,
+        initialVolume: 50,
       })
 
       try {

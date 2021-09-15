@@ -40,7 +40,6 @@ npm start
 |BOT_LEAVE_ON_QUEUE_END| Whether the bot should leave the channel after the queue has ended | true/false | true | false |
 |BOT_LEAVE_ON_QUEUE_END| Whether the bot should leave the channel after the queue has ended | true/false | true | false |
 |BOT_LEAVE_ON_QUEUE_END_TIMEOUT | The cooldown in seconds that the bot should wait before leaving the channel. It requires `BOT_LEAVE_ON_QUEUE_END` to be `true` to work | Integer | 0 | | false |
-|BOT_LEAVE_ON_QUEUE_STOP | Whether the bot should leave the channel after requesting it to stop | true/false | true | false |
 |BOT_LEAVE_ON_EMPTY_CHANNEL| Whether the bot should leave the channel if no one is there and the queue has ended | true/false | true | false |
 |BOT_LEAVE_ON_EMPTY_CHANNEL_TIMEOUT| The cooldown in seconds that the bolt should wait before leaving the channel if no one is there. It requires `BOT_LEAVE_ON_EMPTY_CHANNEL` to be `true` | Integer |0| false |
 |BOT_INITIAL_VOLUME|The volume that the bot should start playing when requested.| [0-100] | 100| false |
@@ -56,3 +55,5 @@ npm start
 - Play a song based on your search terms or url
 ### `/resume`
 - Resumes the current song
+### `/stop`
+- Stops the current queue and clears it

@@ -1,9 +1,9 @@
 const { GuildMember } = require('discord.js')
 
 module.exports = {
-  name: 'resume',
-  description: 'Resume current song',
-  emoji: '▶',
+  name: 'stop',
+  description: 'Stop the current queue',
+  emoji: '🛑',
   async execute(interaction, player) {
     try {
       if (
@@ -34,14 +34,14 @@ module.exports = {
           content: "❌ There's no song being played",
         })
       }
-      const resumed = queue.setPaused(false)
+      queue.destroy()
       return void interaction.followUp({
-        content: resumed ? '▶ | Resumed!' : "❌ | Couldn't resume your song",
+        content: '🛑 | Stopped the player!',
       })
     } catch (error) {
       console.log(error)
       interaction.followUp({
-        content: `There was an error trying to resume your song: ${error.message}`,
+        content: `There was an error trying to stop your song: ${error.message}`,
       })
     }
   },

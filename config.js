@@ -13,7 +13,6 @@ module.exports = {
     }
     return timeout
   })(),
-  leaveOnStop: process.env.BOT_LEAVE_ON_QUEUE_STOP?.toLowerCase() != 'false',
   leaveOnEmpty:
     process.env.BOT_LEAVE_ON_EMPTY_CHANNEL?.toLowerCase() != 'false',
   leaveOnEmptyTimeout: (() => {

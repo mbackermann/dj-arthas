@@ -58,7 +58,7 @@ module.exports = {
         leaveOnEnd:
           player.client.config.leaveOnEnd &&
           player.client.config.leaveOnEndTimeout == 0,
-        leaveOnStop: player.client.config.leaveOnStop,
+        leaveOnStop: false,
         leaveOnEmpty: player.client.config.leaveOnEmpty,
         leaveOnEmptyCooldown: player.client.config.leaveOnEmptyTimeout * 1000,
         initialVolume: player.client.config.initialVolume,

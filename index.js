@@ -22,61 +22,72 @@ client.on('guildCreate', async (guild) => {
 })
 
 player.on('trackStart', (queue, track) => {
-  try{
-    queue.metadata.channel.send(
-      `🎶 | Now playing **${track.title}** in **${queue.connection.channel.name}**!`
-    )
-  }catch(error){
+  queue.metadata.channel.send(
+    `🎶 | Now playing **${track.title}** in **${queue.connection.channel.name}**!`
+  )
+})
+
+player.on('error', (queue, error) => {
+  console.error(
+    `[${queue.guild.name}] Error emitted from the player: ${error.message}`
+  )
+  try {
+    queue.metadata.interaction.followUp({
+      content: `❌ **I failed to execute that command.** Encountered: \`${error.message}\``,
+    })
+  } catch (error) {
     console.error(error)
   }
 })
 
-player.on('error', (queue, error) => {
-  console.log(
-    `[${queue.guild.name}] Error emitted from the player: ${error.message}`
-  )
-})
-
 player.on('connectionError', (queue, error) => {
-  console.log(
+  console.error(
     `[${queue.guild.name}] Error emitted from the connection: ${error.message}`
   )
 })
 
 player.on('trackAdd', (queue, track) => {
   try {
-    queue.metadata.send(`🎶 | **${track.title}** added to queue!`)
-  }catch(error){
+    queue.metadata.channel.send(`🗒️ | **${track.title}** added to queue!`)
+  } catch (error) {
+    console.error(error)
+  }
+})
+
+player.on('connectionCreate', (queue, connection) => {
+  try {
+    queue.metadata.interaction.followUp({
+      content: `👍 **Joined \`${connection.channel.name}\` and bound to <#${queue.metadata.channel.id}>**`,
+    })
+  } catch (error) {
     console.error(error)
   }
 })
 
 player.on('botDisconnect', (queue) => {
-  try{
-    queue.metadata.send(
+  try {
+    queue.metadata.channel.send(
       '❌ | I was manually disconnected from the voice channel, clearing queue!'
     )
-  }catch(error){
+  } catch (error) {
     console.error(error)
   }
-  
 })
 
 player.on('channelEmpty', (queue) => {
-  try{
-    queue.metadata.send('❌ | Leaving the channel, nobody is here')
-  }catch(error){
+  try {
+    queue.metadata.channel.send('❌ | Leaving the channel, nobody is here')
+  } catch (error) {
     console.error(error)
   }
 })
 
 player.on('queueEnd', (queue) => {
-  try{
-    queue.metadata.send('✅ | You have no more tracks in queue!')
-  }catch(error){
+  try {
+    queue.metadata.channel.send('✅ | You have no more tracks in queue!')
+  } catch (error) {
     console.error(error)
   }
-  
 })
 
 client.on('interactionCreate', async (interaction) => {

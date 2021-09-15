@@ -3,7 +3,8 @@ const { QueryType } = require('discord-player')
 
 module.exports = {
   name: 'play',
-  description: 'Play a song',
+  description: 'Play a song based on your search terms or url',
+  emoji: '🎶',
   options: [
     {
       name: 'search',
@@ -14,6 +15,7 @@ module.exports = {
     },
   ],
   async execute(interaction, player) {
+    await interaction.deferReply()
     try {
       if (
         !(interaction.member instanceof GuildMember) ||
@@ -36,8 +38,6 @@ module.exports = {
         })
       }
 
-      await interaction.deferReply()
-
       const search = interaction.options.get('search').value
       const searchResult = await player
         .search(search, {
@@ -50,7 +50,10 @@ module.exports = {
           content: 'No results were found for your search!',
         })
       const queue = await player.createQueue(interaction.guild, {
-        metadata: interaction.channel,
+        metadata: {
+          channel: interaction.channel,
+          interaction: interaction,
+        },
         leaveOnEnd: true,
         leaveOnStop: true,
         leaveOnEmpty: true,
@@ -70,7 +73,7 @@ module.exports = {
       await interaction.followUp({
         content: `⏱ | Loading your ${
           searchResult.playlist ? 'playlist' : 'track'
-        }...`,
+        } \`${search}\`...`,
       })
       searchResult.playlist
         ? queue.addTracks(searchResult.tracks)

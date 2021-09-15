@@ -23,7 +23,6 @@ class DiscordClient extends Client {
     }
 
     this.config = config
-    this.queue = new Map()
   }
 }
 

@@ -55,11 +55,13 @@ module.exports = {
           channel: interaction.channel,
           interaction: interaction,
         },
-        leaveOnEnd: true,
-        leaveOnStop: true,
-        leaveOnEmpty: true,
-        leaveOnEmptyCooldown: 30000,
-        initialVolume: 50,
+        leaveOnEnd:
+          player.client.config.leaveOnEnd &&
+          player.client.config.leaveOnEndTimeout == 0,
+        leaveOnStop: player.client.config.leaveOnStop,
+        leaveOnEmpty: player.client.config.leaveOnEmpty,
+        leaveOnEmptyCooldown: player.client.config.leaveOnEmptyTimeout * 1000,
+        initialVolume: player.client.config.initialVolume,
       })
 
       try {

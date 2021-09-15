@@ -1,14 +1,13 @@
 require('dotenv').config()
 const DiscordClient = require('./client/Client')
+const GuildsTimeout = require('./guildsTimeout/GuildsTimeout')
 const { Player } = require('discord-player')
 const registerSlashCommands = require('./commands/registerSlashCommands')
+const config = require('./config.js')
 
-const config = {
-  token: process.env.DISCORD_BOT_TOKEN,
-  clientId: process.env.DISCORD_CLIENT_ID,
-}
 const client = new DiscordClient(config)
 const player = new Player(client)
+const guildsTimeout = new GuildsTimeout(client)
 
 client.once('ready', async (client) => {
   console.log('Discord Bot ready!')
@@ -49,6 +48,7 @@ player.on('connectionError', (queue, error) => {
 player.on('trackAdd', (queue, track) => {
   try {
     queue.metadata.channel.send(`🗒️ | **${track.title}** added to queue!`)
+    guildsTimeout.clearTimeout(queue)
   } catch (error) {
     console.error(error)
   }
@@ -69,6 +69,7 @@ player.on('botDisconnect', (queue) => {
     queue.metadata.channel.send(
       '❌ | I was manually disconnected from the voice channel, clearing queue!'
     )
+    guildsTimeout.clearTimeout(queue)
   } catch (error) {
     console.error(error)
   }
@@ -77,6 +78,7 @@ player.on('botDisconnect', (queue) => {
 player.on('channelEmpty', (queue) => {
   try {
     queue.metadata.channel.send('❌ | Leaving the channel, nobody is here')
+    guildsTimeout.clearTimeout(queue)
   } catch (error) {
     console.error(error)
   }
@@ -85,6 +87,7 @@ player.on('channelEmpty', (queue) => {
 player.on('queueEnd', (queue) => {
   try {
     queue.metadata.channel.send('✅ | You have no more tracks in queue!')
+    guildsTimeout.setTimeout(queue)
   } catch (error) {
     console.error(error)
   }
@@ -101,5 +104,7 @@ client.on('interactionCreate', async (interaction) => {
     })
   }
 })
-
+if (client.config.debug) {
+  console.log('Bot Settings', client.config)
+}
 client.login(client.config.token)

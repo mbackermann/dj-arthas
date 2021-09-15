@@ -5,6 +5,11 @@
 ## Add DJ Arthas to your server
 [Add me to your server](https://bit.ly/3nMRhnB)
 
+## Requirements
+- [FFmpeg](https://www.ffmpeg.org/)
+- [Node](https://nodejs.org/en/) v.16x or higher
+- [NPM](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)
+
 ## Installation
 1. Install dependencies
 ```

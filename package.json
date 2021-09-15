@@ -1,4 +1,11 @@
 {
+  "name": "dj-arthas",
+  "version": "0.1",
+  "repository": "https://github.com/mbackermann/dj-arthas",
+  "description": "Discord bot for playing music in voice channels",
+  "main": "index.js",
+  "author": "Mauricio Ackermann",
+  "license": "MIT",
   "dependencies": {
     "@discordjs/opus": "^0.6.0",
     "@discordjs/rest": "^0.1.0-canary.0",

@@ -23,6 +23,21 @@ class DiscordClient extends Client {
     }
 
     this.config = config
+    this.guildsVoiceConnections = []
+  }
+
+  addVoiceConnection(guildId) {
+    if (this.guildsVoiceConnections.indexOf(guildId) < 0) {
+      this.guildsVoiceConnections.push(guildId)
+    }
+    return this.guildsVoiceConnections.length
+  }
+
+  deductVoiceConnection(guildId) {
+    this.guildsVoiceConnections = this.guildsVoiceConnections.filter((gid) => {
+      gid != guildId
+    })
+    return this.guildsVoiceConnections.length
   }
 }
 

@@ -13,6 +13,7 @@ const guildsTimeout = new GuildsTimeout(client)
 client.once('ready', async (client) => {
   Logger.log('Discord Bot ready!')
   Logger.debug('Client ready', client)
+  await client.user.setActivity('/help', { type: 'LISTENING' })
   const guildIds = Array.from((await client.guilds.fetch()).keys())
   registerSlashCommands(guildIds, client)
 })
@@ -64,6 +65,11 @@ player.on('connectionCreate', (queue, connection) => {
     queue.metadata.interaction.followUp({
       content: `👍 **Joined \`${connection.channel.name}\` and bound to <#${queue.metadata.channel.id}>**`,
     })
+    Logger.log(
+      `New connection on ${
+        queue.guild.id
+      }. Total connections ${client.addVoiceConnection(queue.guild.id)}`
+    )
   } catch (error) {
     Logger.error(error)
   }
@@ -71,6 +77,13 @@ player.on('connectionCreate', (queue, connection) => {
 
 player.on('botDisconnect', (queue) => {
   Logger.debug('playerBotDisconnected', queue)
+  Logger.log(
+    `Voice Channel Guild ${
+      queue.guild.id
+    } disconnected. Total connections ${client.deductVoiceConnection(
+      queue.guild.id
+    )}`
+  )
   try {
     guildsTimeout.clearTimeout(queue)
   } catch (error) {

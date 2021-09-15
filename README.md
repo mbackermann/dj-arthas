@@ -2,14 +2,14 @@
 
 ![DJ Arthas](/images/logo.jpg)
 
-## Add Bot to your server
+## Add DJ Arthas to your server
 [Add me to your server](https://bit.ly/3nMRhnB)
 
 ## Installation
 1. Install dependencies
 ```
 yarn install
-  # or
+# or
 npm install
 ```
 
@@ -48,12 +48,14 @@ npm start
 ### `/help`
 - List bot's commands
 ### `/pause`
-- Pauses the current song.
+- Pauses the current track.
 ### `/ping`
 - Just a ping. I will reply with a pong.
 ### `/play [terms or url]`
-- Play a song based on your search terms or url
+- Play a track based on your search terms or url
 ### `/resume`
-- Resumes the current song
+- Resumes the current track
+### `/skip`
+- Skip the current track
 ### `/stop`
 - Stops the current queue and clears it

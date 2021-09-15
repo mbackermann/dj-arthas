@@ -1,4 +1,5 @@
 const { GuildMember } = require('discord.js')
+const Logger = require('../../logger/Logger')
 
 module.exports = {
   name: 'stop',
@@ -31,7 +32,7 @@ module.exports = {
       const queue = player.getQueue(interaction.guildId)
       if (!queue || !queue.playing) {
         return void interaction.followUp({
-          content: "❌ There's no song being played",
+          content: "❌ There's no track being played",
         })
       }
       queue.destroy()
@@ -39,9 +40,9 @@ module.exports = {
         content: '🛑 | Stopped the player!',
       })
     } catch (error) {
-      console.log(error)
+      Logger.log(error)
       interaction.followUp({
-        content: `There was an error trying to stop your song: ${error.message}`,
+        content: `There was an error trying to stop your track: ${error.message}`,
       })
     }
   },

@@ -29,7 +29,6 @@ module.exports = {
     try {
       initialVolume = parseInt(process.env.BOT_INITIAL_VOLUME)
     } catch (error) {
-      console.error(error)
       initialVolume = 100
     }
     return initialVolume

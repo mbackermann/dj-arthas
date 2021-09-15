@@ -1,9 +1,10 @@
 const { GuildMember } = require('discord.js')
 const { QueryType } = require('discord-player')
+const Logger = require('../../logger/Logger')
 
 module.exports = {
   name: 'play',
-  description: 'Play a song based on your search terms or url',
+  description: 'Play a track based on your search terms or url',
   emoji: '🎶',
   options: [
     {
@@ -84,10 +85,10 @@ module.exports = {
         : queue.addTrack(searchResult.tracks[0])
       if (!queue.playing) await queue.play()
     } catch (error) {
-      console.log(error)
+      Logger.log(error)
       interaction.followUp({
         content:
-          'There was an error trying to add your song to queue: ' +
+          'There was an error trying to add your track to queue: ' +
           error.message,
       })
     }

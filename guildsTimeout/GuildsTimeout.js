@@ -1,3 +1,4 @@
+const Logger = require('../logger/Logger')
 class GuildsTimeout {
   constructor(client) {
     this.config = client.config
@@ -9,11 +10,11 @@ class GuildsTimeout {
       if (!this.config.leaveOnEnd || this.config.leaveOnEndTimeout == 0) return
 
       let timeout = setTimeout(() => {
-        console.log('Timeout!')
+        Logger.log('Timeout!')
         try {
           queue.connection.disconnect()
         } catch (error) {
-          console.error(
+          Logger.error(
             'Error trying to disconnect after leaveOnEndCooldown',
             error
           )
@@ -21,7 +22,7 @@ class GuildsTimeout {
       }, this.config.leaveOnEndTimeout * 1000)
       this.timeouts.set(queue.guild.id, timeout)
     } catch (error) {
-      console.error(error)
+      Logger.error(error)
     }
   }
 
@@ -34,7 +35,7 @@ class GuildsTimeout {
         this.timeouts.delete(queue.guild.id)
       }
     } catch (error) {
-      console.error(error)
+      Logger.error(error)
     }
   }
 }

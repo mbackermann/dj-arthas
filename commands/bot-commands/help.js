@@ -4,7 +4,7 @@ module.exports = {
   emoji: '❓',
   execute(interaction, player) {
     let msg = '**I can answer the following commands**'
-    const commands = player.client.commands
+    player.client.commands
       .sort((a, b) => {
         if (a.key < b.key) {
           return -1

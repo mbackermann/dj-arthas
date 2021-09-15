@@ -1,8 +1,9 @@
 const { GuildMember } = require('discord.js')
+const Logger = require('../../logger/Logger')
 
 module.exports = {
   name: 'pause',
-  description: 'Pause your current song',
+  description: 'Pause your current track',
   emoji: '⏸',
   async execute(interaction, player) {
     try {
@@ -31,17 +32,17 @@ module.exports = {
       const queue = player.getQueue(interaction.guildId)
       if (!queue || !queue.playing) {
         return void interaction.followUp({
-          content: "❌ There's no song being played",
+          content: "❌ There's no track being played",
         })
       }
       const paused = queue.setPaused(true)
       return void interaction.followUp({
-        content: paused ? '⏸ | Paused!' : "❌ | Couldn't pause your song",
+        content: paused ? '⏸ | Paused!' : "❌ | Couldn't pause your track",
       })
     } catch (error) {
-      console.log(error)
+      Logger.log(error)
       interaction.followUp({
-        content: `There was an error trying to pause your song: ${error.message}`,
+        content: `There was an error trying to pause your track: ${error.message}`,
       })
     }
   },

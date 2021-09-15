@@ -2,9 +2,9 @@ const { GuildMember } = require('discord.js')
 const Logger = require('../../logger/Logger')
 
 module.exports = {
-  name: 'resume',
-  description: 'Resume current track',
-  emoji: '▶',
+  name: 'skip',
+  description: 'Skip the current track',
+  emoji: '⏭️',
   async execute(interaction, player) {
     try {
       if (
@@ -35,14 +35,16 @@ module.exports = {
           content: "❌ There's no track being played",
         })
       }
-      const resumed = queue.setPaused(false)
+      const skipped = queue.skip()
       return void interaction.followUp({
-        content: resumed ? '▶ | Resumed!' : "❌ | Couldn't resume your track",
+        content: skipped
+          ? `⏭️ | Skipped current track`
+          : `❌ | Coulnd't skip this track!`,
       })
     } catch (error) {
       Logger.log(error)
       interaction.followUp({
-        content: `There was an error trying to resume your track: ${error.message}`,
+        content: `There was an error trying to skip your track: ${error.message}`,
       })
     }
   },

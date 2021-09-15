@@ -3,7 +3,7 @@ module.exports = {
   description: "List bot's commands",
   emoji: '❓',
   execute(interaction, player) {
-    let msg = '**DJ Arthas can aswer the following commands**'
+    let msg = '**I can aswer the following commands**'
     const commands = player.client.commands
       .sort((a, b) => {
         if (a.key < b.key) {

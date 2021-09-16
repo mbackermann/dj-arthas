@@ -46,7 +46,8 @@ module.exports = {
           content: "❌ There's no track being played",
         })
       }
-      queue.destroy()
+      queue.clear()
+      queue.skip()
       return void interaction.followUp({
         content: '🛑 | Stopped the player!',
       })

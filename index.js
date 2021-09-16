@@ -104,7 +104,6 @@ player.on('channelEmpty', (queue) => {
 player.on('queueEnd', (queue) => {
   Logger.debug('queueEnded', queue)
   try {
-    queue.metadata.channel.send('✅ | You have no more tracks in queue!')
     guildsTimeout.setTimeout(queue)
   } catch (error) {
     Logger.error(error)

@@ -94,11 +94,11 @@ player.on('botDisconnect', (queue) => {
 player.on('channelEmpty', (queue) => {
   Logger.debug('playerChannelEmptied', queue)
   try {
-    if(client.config.leaveOnEmpty && queue.connection){
-      queue.connection.disconnect()
+    if (client.config.leaveOnEmpty) {
+      if (queue.connection) queue.connection.disconnect()
+      queue.metadata.channel.send('❌ | Leaving the channel, nobody is here')
+      guildsTimeout.clearTimeout(queue)
     }
-    queue.metadata.channel.send('❌ | Leaving the channel, nobody is here')
-    guildsTimeout.clearTimeout(queue)
   } catch (error) {
     Logger.error(error)
   }

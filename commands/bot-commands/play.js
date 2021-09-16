@@ -38,6 +38,17 @@ module.exports = {
         })
       }
 
+      const permissions = interaction.member.voice.channel.permissionsFor(
+        interaction.guild.me
+      )
+
+      if (!permissions.has('CONNECT') || !permissions.has('SPEAK')) {
+        return void interaction.reply({
+          content: "I don't have permission to join your voice channel!",
+          ephemeral: true,
+        })
+      }
+
       await interaction.deferReply()
 
       const search = interaction.options.get('search').value

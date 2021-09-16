@@ -1,5 +1,6 @@
 const { Client, Intents, Collection } = require('discord.js')
 const fs = require('fs')
+const Logger = require('../logger/Logger')
 
 class DiscordClient extends Client {
   constructor(config) {

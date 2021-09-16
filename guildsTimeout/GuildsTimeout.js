@@ -10,7 +10,6 @@ class GuildsTimeout {
       if (!this.config.leaveOnEnd || this.config.leaveOnEndTimeout == 0) return
 
       let timeout = setTimeout(() => {
-        Logger.log('Timeout!')
         try {
           queue.connection.disconnect()
         } catch (error) {
